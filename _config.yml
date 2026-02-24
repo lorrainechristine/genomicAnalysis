@@ -14,10 +14,10 @@ baseurl: "/genomicAnalysis"
 # Of course don't forget to change the username and projectname to YOUR username and project
 
 # Name of website
-title: Disciplina BIO0446
+title: Disciplina BIO0446/BIO5755
 
 # Short description of your site
-description: Transcriptomics at UNMSM
+description: Genomics classes
 
 # --- Navigation bar options --- #
 
