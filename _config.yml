@@ -27,7 +27,7 @@ navbar-links:
   Syllabus: "syllabus/"
   Lectures:
     - Day01: "2026-02-26-Day01/"
-    # - Day02: "2026-01-26-Day02/"
+     - Day02: "2026-03-05-Day02/"
     # - Day03: "2026-01-27-Day03/"
     # - Day04: "2026-01-28-Day04/"
    # - Day05: "2026-01-29-Day05/"
