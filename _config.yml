@@ -4,7 +4,7 @@
 # baseurl is the website's URL without the hostname
 
 # If you are building a simple GitHub user page (http://username.github.io) then use these settings:
-url: "https://lorrainechristine.github.io/genomicAnalysis"
+url: "https://lorrainechristine.github.io"
 baseurl: "/genomicAnalysis"
 
 # If you are building a GitHub project page then use these settings:
@@ -25,13 +25,9 @@ description: Transcriptomics at UNMSM
 navbar-links:
   Home: "index.html"
   Syllabus: "syllabus/"
-Lectures:
-  - Day01: "2026-02-26-Day01/"
-  - Day02: "2026-03-05-Day02/"
-    # - Day03: "2026-01-27-Day03/"
-    # - Day04: "2026-01-28-Day04/"
-   # - Day05: "2026-01-29-Day05/"
-   # - Day06: "2026-01-30-Day06/"      
+  Lectures:
+    Day01: "2026-02-26-Day01/"
+    Day02: "2026-03-05-Day02/"
   Resources: "resources/"
 
 # Image to show in the navigation bar - image must be a square (width = height)
