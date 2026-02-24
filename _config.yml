@@ -26,12 +26,12 @@ navbar-links:
   Home: "index.html"
   Syllabus: "syllabus/"
   Lectures:
-    - Day01: "2025-01-20-Day01/"
-    - Day02: "2025-01-26-Day02/"
-    - Day03: "2025-01-27-Day03/"
-    - Day04: "2025-01-28-Day04/"
-    - Day05: "2025-01-29-Day05/"
-    - Day06: "2025-01-30-Day06/"      
+    - Day01: "2026-02-26-Day01/"
+    # - Day02: "2026-01-26-Day02/"
+    # - Day03: "2026-01-27-Day03/"
+    # - Day04: "2026-01-28-Day04/"
+   # - Day05: "2026-01-29-Day05/"
+   # - Day06: "2026-01-30-Day06/"      
   Resources: "resources/"
 
 # Image to show in the navigation bar - image must be a square (width = height)
