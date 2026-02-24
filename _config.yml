@@ -25,9 +25,9 @@ description: Transcriptomics at UNMSM
 navbar-links:
   Home: "index.html"
   Syllabus: "syllabus/"
-  Lectures:
-    - Day01: "2026-02-26-Day01/"
-     - Day02: "2026-03-05-Day02/"
+Lectures:
+  - Day01: "2026-02-26-Day01/"
+  - Day02: "2026-03-05-Day02/"
     # - Day03: "2026-01-27-Day03/"
     # - Day04: "2026-01-28-Day04/"
    # - Day05: "2026-01-29-Day05/"
@@ -68,7 +68,7 @@ footer-link-col: "#404040"
 # Change all these values or delete the ones you don't want.
 # Important: you must keep the "name" parameter, everything else you can remove
 author:
-name: Sónia Andrade, Tatiana T Torres, Thainá Cortez, Lorraine Christine, Bruno José Teixeira de Melo
+  name: "Sónia Andrade, Tatiana T Torres, Thainá Cortez, Lorraine Christine, Bruno José Teixeira de Melo"
 
 # Select your active Social Network Links.
 # Uncomment the links you want to show in the footer and add your information to each link.
