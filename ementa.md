@@ -1,5 +1,3 @@
-# BIO0446/BIO5755 — Desenho Experimental e Análise de Dados Genômicos (2026)
-
 ## Informações gerais
 
 **Horário das aulas:** Quinta-feira — das 9h às 12h  
