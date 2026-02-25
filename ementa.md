@@ -1,3 +1,9 @@
+---
+layout: page
+title: Ementa
+subtitle: Desenho Experimental e Análise de Dados Genômicos
+---
+
 ## Informações gerais
 
 **Horário das aulas:** Quinta-feira — das 9h às 12h  
