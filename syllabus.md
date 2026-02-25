@@ -13,7 +13,7 @@ subtitle: Desenho Experimental e Análise de Dados Genômicos
 | 3 | 12/03 | Citogenética, tamanho genômico, sequenciamento. Estratégias dependendo da escala/hipótese de pesquisa |
 | 4 | 19/03 | Genômica: montagem e anotação |
 | 5 | 26/03 | Bancos de dados |
-| 6 | 02/04 | Semana Santa |
+| - | 02/04 | Feriado |
 | 7 | 09/04 | Transcriptômica |
 | 8 | 16/04 | Análise de Expressão Gênica |
 | 9 | 23/04 | **Avaliação I** |
