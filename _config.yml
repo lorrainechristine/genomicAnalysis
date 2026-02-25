@@ -23,9 +23,9 @@ description: Genomics classes
 
 # List of links in the navigation bar
 navbar-links:
-  Home: "index.html"
+  Início: "index.html"
   Cronograma: "syllabus/"
-  Lectures:
+  Aulas:
     Aula01: "2026-02-26-Day01/"
     Day02: "2026-03-05-Day02/"
   Ementa: "resources/"
