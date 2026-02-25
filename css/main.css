@@ -187,6 +187,7 @@ img {
   width: 100%;
   border-radius: 50%;
   display: block;
+  aspect-ratio: 1;
 }
 
 .navbar-custom.top-nav-expanded .avatar-container  {
