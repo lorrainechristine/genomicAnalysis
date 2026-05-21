@@ -1,0 +1,194 @@
+---
+layout: post
+title: Prática 8b. Metabarcoding
+---
+
+# Prática 8b. Metabarcoding
+
+## Sumário (clique para ir ao tópico)
+
+- [Parte I. Identificação dos taxa](#parte-i-identificacao-dos-taxa)
+- [Parte II. Análise de diversidade das amostras](#parte-ii-analise-de-diversidade-das-amostras)
+
+<a id="parte-i-identificacao-dos-taxa"></a>
+
+## Parte I. Identificação dos taxa
+
+Vamos dar continuidade às análises de metabarcoding que iniciamos na semana anterior.
+
+Primeiro, para organizar de maneira mais efetiva as análises, cria uma pasta chamada pratica8b com o comando:
+
+```bash
+mkdir pratica8b
+```
+
+Agora entre na pasta criada:
+
+```bash
+cd pratica8b
+```
+
+**Baixe `DUAS` das amostras abaixo:**
+
+```bash
+scp -P 2205 deadg@143.107.247.17:/home/deadg/pratica9b/otussample11.fa ./
+scp -P 2205 deadg@143.107.247.17:/home/deadg/pratica9b/otussample9.fa ./
+scp -P 2205 deadg@143.107.247.17:/home/deadg/pratica9b/otussample7.fa ./
+scp -P 2205 deadg@143.107.247.17:/home/deadg/pratica9b/otussample5.fa ./
+```
+
+**Senha:** D4!42026
+
+Copie também o executável do Usearch e os dois arquivos da referência:
+
+```bash
+scp -P 2205 deadg@143.107.247.17:/home/deadg/pratica9b/usearch ./
+```
+
+**Senha:** D4!42026
+
+*aqui é importante usar a versão do servidor! Lembre de checar se o arquivo está executável pela cor na tela.*
+
+```bash
+scp -P 2205 deadg@143.107.247.17:/home/deadg/pratica9b/ref_uniques.fa ./
+scp -P 2205 deadg@143.107.247.17:/home/deadg/pratica9b/ref.udb ./
+```
+
+**Senha:** D4!42026
+
+Esses arquivos foram gerados removendo os singletons da última etapa.
+
+Etapa de predição e alinhamento: Esta etapa irá fazer a predição e alinhamento das nossas amostras contra a base de referência:
+
+```bash
+./usearch -utax otussample[numero da amostra].fa -db ref.udb -utaxout amostra[numero da amostra].utax -strand both -alnout aln[numero da amostra].txt -fastaout otus_tax[numero da amostra].fa >&logpred[numero da amostra]
+```
+
+Substitua o **número da amostra** pelo respectivo número no arquivo baixado.
+
+Para saber sobre o comando utax: <a href="https://drive5.com/usearch/manual8.1/cmd_utax.html" target="_blank" rel="noopener noreferrer">clique aqui</a>.
+
+### Questão 1
+
+Olhe seus resultados e responda as perguntas:
+
+**a)** Olhe seu log e explique o que você entende por ‘100.0% ## seqs, ## at phylum, # genus’.
+
+**b)** Observe os 3 arquivos de saída. Qual você considera o mais informativo?
+
+**c)** Compare as duas amostras e veja se diferem quanto ao número de OTUs (unidade taxonômica operacional) que apresentam hits contra a hierarquia taxonômica gênero. Qual sua hipótese para explicar isso?
+
+**d)** Olhando seu arquivo fasta, explique como você entende o cabeçalho e o score associado a cada nível taxonômico.
+
+Etapa de alinhamento global final. Neste alinhamento você irá definir a identidade mínima necessária para o alinhamento.
+
+```bash
+./usearch -search_global otussample[numero].fa -db ref_uniques.fa -id 0.8 -alnout hits_sens[numero].aln -strand both -log make_otutab_sens[numero].log -otutabout otutab_sens[numero].txt
+```
+
+Para saber sobre o comando: <a href="https://www.drive5.com/usearch/manual/cmd_search_global.html" target="_blank" rel="noopener noreferrer">clique aqui</a>.
+
+### Questão 2
+
+Observe seus arquivos de saída e responda:
+
+**a)** Olhando o log, qual foi a taxa de sucesso de alinhamento nas duas amostras? Há diferença?
+
+**b)** Rode novamente com a opção id=0.95 e salve seus arquivos de saída com um **novo nome**. Qual é a diferença observada em relação ao resultado anterior? Explique a razão da diferença.
+
+**c)** Se esses fossem seus dados, com base em quais informações você escolheria o corte de porcentagem de identidade (id)?
+
+<a id="parte-ii-analise-de-diversidade-das-amostras"></a>
+
+## Parte II. Análise de diversidade das amostras
+
+Nesta etapa, você irá usar o Rstudio instalado no Windows do notebook da sala multimídia para analisar a diversidade das amostras coletadas no Araçá. Iremos analisar a diversidade alfa, beta, riqueza, efeito de variáveis ambientais previamente coletadas nos pontos amostrados e distribuição dos filos em todas as amostras analisadas.
+
+A partir da tabela otu_sens gerada da última análise, é criada uma tabela (Rinput.csv) contendo a informação de presença de todos os filos da base referência. Como Nematoda é o filo de maior abundância na meiofauna, as análises ecológicas são feitas com os dados apenas deste grupo.
+
+Para isso, você irá baixar uma pasta do servidor que contém os dados de entrada e os scripts do R:
+
+```bash
+scp -r -P 2205 deadg@143.107.247.17:/home/deadg/pratica9b/praticaR ./
+```
+
+**Senha:** D4!42026
+
+Abra o aplicativo do Rstudio, representado pelo símbolo abaixo:
+
+<img src="https://raw.githubusercontent.com/lorrainechristine/genomicAnalysis/master/img/r.png" alt="RStudio" />
+
+Você estará nessa tela:
+
+<img src="https://raw.githubusercontent.com/lorrainechristine/genomicAnalysis/master/img/r2.png" alt="Interface do RStudio" />
+
+Em **1**, temos o **console**, isto é, o equivalente ao terminal do Linux, porém do R. Aqui, o processamento de dados e comandos serão mostrados. Caso haja algum problema no processo, o problema será informado nessa janela.
+
+Em **2**, temos o **environment**, onde os dados que incorporarmos ao R, como tabelas, dataframes, funções, entre outros, são indicados ali.
+
+Em **3**, teremos os plots gerados ao longo do script. Caso deseje ver os arquivos contidos na pasta onde o seu R está, basta clicar em ‘Files’. Também é possível saber mais sobre pacotes ao clicar em ‘Help’, bastando digitar o nome desejado e baixar pacotes pela opção “Packages”.
+
+Agora, após baixar os arquivos para rodarmos o script em R, clique em “Session” -> “Set Working Directory” -> “Choose Directory”, e selecione a pasta **praticaR**, baixada anteriormente:
+
+<img src="https://raw.githubusercontent.com/lorrainechristine/genomicAnalysis/master/img/r3.png" alt="Selecionar diretório de trabalho no RStudio" />
+
+Em seguida, clique em “Files” na caixa ao lado direito inferior do , entre na pasta praticaR e selecione o arquivo “metabarcoding.R”.
+
+<img src="https://raw.githubusercontent.com/lorrainechristine/genomicAnalysis/master/img/r4.png" alt="Abrir arquivo metabarcoding.R no RStudio" />
+
+Este é o script criado para a aula, e ao clicar, ele deverá abrir ao lado esquerdo inferior da interface do R. Você verá algo assim:
+
+<img src="https://raw.githubusercontent.com/lorrainechristine/genomicAnalysis/master/img/r5.png" alt="Script metabarcoding.R aberto no RStudio" />
+
+Os textos em verde e hashtags (#), apontados pela seta, são instruções ou comentários que NÃO serão lidos pelo script. Aproveite para comentar tudo o que achar necessário.
+
+Para rodar as linhas do script, há duas opções:
+
+- Posicione o mouse na linha desejada e clique em “Run”, apontado pela seta vermelha acima.
+- Posicione o mouse na linha desejada e selecione Ctrl + Enter.
+
+Ao rodar a primeira linha, por exemplo, você verá que duas informações surgirão no Rstudio. A primeira, na aba Console, e a segunda, na aba Environment.
+
+<img src="https://raw.githubusercontent.com/lorrainechristine/genomicAnalysis/master/img/r6.png" alt="Console e Environment no RStudio" />
+
+As informações contidas no Console se tratam da linha de comando executada. Como não houve mensagem de erro, tudo correu certo. As informações do Environment apontam que nesta linha do script, você incorporou os nomes “vegan”, “reshape”, “ggplot2”, “scales”, “ape” e “MASS” à variável pacotes.raster, as qual será utilizada logo em seguida para indicar os pacotes que devem ser instalados e carregados para o restante do script.
+
+Corra o restante do script, **rodando linha a linha**, observando os resultados gerados. Durante o processo, busque compreender o que está sendo incorporado ao seu script.
+
+### Dicas úteis
+
+- Todas as linhas contém um comentário ao final (iniciado pela **#**). Leia com atenção.
+- Sempre que no ambiente Environment, houver um objeto classificado como “data”, você poderá clicar e visualizar, para facilitar a leitura.
+- Sempre que houver uma linha com o símbolo **<-**, isso significa que dados, objetos ou outras informações estão sendo armazenadas dentro de uma variável. Por exemplo:
+
+```r
+multivariada <- read.csv2("Rinput.csv", row.names=1)
+```
+
+Neste caso, a tabela **Rinput.csv** está sendo armazenada com o nome de “**multivariada**” no seu script R.
+
+- `Warnings` não são erros, necessariamente. Caso apareça algum, tente prosseguir com o script. Caso não consiga, peça auxílio.
+
+**Para todas as perguntas referente a gráficos, cole as imagens observadas nas respostas.**
+
+### Questão 3
+
+**a)** Na linha 41, você terá gerado o primeiro plot do script, referente à curva de rarefação. Para entender mais do que se trata a análise, leia <a href="https://www.cd-genomics.com/microbioseq/rarefaction-curve-a-measure-of-species-richness-and-diversity.html#:~:text=The%20rarefaction%20curve%20is%20a,species%20found%20on%20each%20sample." target="_blank" rel="noopener noreferrer">este link</a>. Explique o que se entende no gráfico da curva de rarefação, considerando o dado utilizado para calculá-la (dataset *multivariada*).
+
+**b)** Em seguida, nas linhas 43 a 49, o script calcula e diferentes medidas de diversidade para compará-las na curva de rarefação. Houve diferença significativa entre os métodos de cálculos e o número contabilizado pela técnica de metabarcoding?
+
+### Questão 4
+
+**a)** Nas linhas 52 a 59, são calculados, para cada estimador de diversidade (Chao, Jackknife1, Jackknife2 e Bootstraping), a taxa de gêneros encontrados e gêneros esperados. O que isso nos indica e qual das métricas recuperou a maior taxa de variedade?
+
+**b)** Na linha 79, são plotadas as composições de cada uma das comunidades meiofaunais amostradas. Escolha duas amostras no gráfico de composição das amostras em termos de filos. Há algum padrão de composição claro entre as amostras? É possível observar a presença de filos em locais específicos? Como você discutiria esses padrões?
+
+### Questão 5
+
+Na curva de rarefação que confronta o método de metabarcoding *versus* morfologia (linhas 108 a 111), o que pode ser observado?
+
+### Questão 6
+
+**a)** Sobre o RDA calculado para os dados de metabarcoding, observe os gráficos gerados nas linhas 128 e 129. Leia sobre o escalonamento (scaling = 1 e scaling = 2) <a href="https://r.qcbs.ca/workshop10/book-en/redundancy-analysis.html" target="_blank" rel="noopener noreferrer">aqui</a>, na seção “RDA plot”. Como você interpretaria estes resultados? Considere as siglas bac.min = minimum bacteria amount recorded; sorting = heterogeneidade de grãos e AM_M = average medium sand.
+
+**b)** Analisando somente o gráfico scaling=1, fornecidos nas linhas 132 (metabarcoding) e 162 (morfologia), como você explicaria a diferença entre os gráficos, visto que pertencem às mesmas amostragens? Caso prefira, as versões simplificadas destes gráficos estão nas linhas 128 e 159, respectivamente.
